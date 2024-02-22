@@ -1,0 +1,16 @@
+1.
+SELECT COUNT(Data_dodania) AS IloscZdjec2014 FROM `zdjecia` WHERE YEAR(Data_dodania) LIKE "2014";
+
+2.
+
+SELECT A.Imie,a.Nazwisko,A.Kraj,B.Imie,B.Nazwisko,B.Kraj FROM `znajomosci` INNER JOIN uzytkownicy AS A ON znajomosci.Znajomy_1 = A.ID_uzytkownika INNER JOIN uzytkownicy AS B ON znajomosci.Znajomy_2 = B.ID_uzytkownika WHERE A.Imie = B.Imie;
+
+3.
+
+SELECT uzytkownicy.Kraj,COUNT(ID_zdjecia) AS IloscZdjec FROM `zdjecia` INNER JOIN uzytkownicy ON zdjecia.ID_uzytkownika = uzytkownicy.ID_uzytkownika GROUP BY uzytkownicy.Kraj  
+ORDER BY IloscZdjec DESC LIMIT 10;
+
+4.
+
+SELECT uzytkownicy.Imie,uzytkownicy.Nazwisko, (zdjecia.Szerokosc*zdjecia.Wysokosc) AS Piksele FROM `uzytkownicy` INNER JOIN zdjecia ON uzytkownicy.ID_uzytkownika = zdjecia.ID_uzytkownika  
+ORDER BY `Piksele` ASC LIMIT 1;

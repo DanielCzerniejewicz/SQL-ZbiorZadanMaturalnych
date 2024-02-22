@@ -1,0 +1,10 @@
+1.
+
+SELECT SUM(dlugosc) FROM `drogi`;
+
+2.
+
+SELECT drogi.nazwa,drogi.dlugosc FROM `drogi` LEFT JOIN stacje ON drogi.id_drogi = stacje.id_drogi WHERE stacje.id_drogi IS NULL  
+ORDER BY `drogi`.`dlugosc` DESC LIMIT 1;
+
+3.

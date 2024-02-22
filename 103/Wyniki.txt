@@ -1,0 +1,18 @@
+1.
+
+SELECT pacjenci.Imie,pacjenci.Nazwisko, COUNT(badania.Id_badanie) FROM `pacjenci` INNER JOIN badania ON pacjenci.PESEL = badania.PESEL GROUP BY pacjenci.PESEL  
+ORDER BY `COUNT(badania.Id_badanie)` DESC LIMIT 1;
+
+2.
+
+SELECT pacjenci.NFZ,SUM(rtg.Cena_Badania) AS Cena FROM `pacjenci` INNER JOIN badania ON pacjenci.PESEL = badania.PESEL INNER JOIN rtg ON badania.Id_badanie = rtg.Id_badanie GROUP BY pacjenci.NFZ  
+ORDER BY `Cena` DESC
+
+3a.
+
+SELECT Nazwa_badania,COUNT(badania.Id_badanie) FROM `rtg` INNER JOIN badania ON rtg.Id_badanie = badania.Id_badanie GROUP BY Nazwa_badania 
+ORDER BY `COUNT(badania.Id_badanie)` DESC LIMIT 1;
+
+4.
+
+SELECT pacjenci.Plec,COUNT(pacjenci.PESEL) FROM `pacjenci` LEFT JOIN badania ON pacjenci.PESEL = badania.PESEL WHERE badania.PESEL IS NOT NULL GROUP BY pacjenci.Plec;

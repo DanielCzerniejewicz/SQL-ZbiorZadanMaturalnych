@@ -1,0 +1,16 @@
+1.
+SELECT sprzet_budowlany.Nazwa_sprzetu,COUNT(wynajem.ID_sprzetu) FROM `sprzet_budowlany` INNER JOIN wynajem ON sprzet_budowlany.ID_sprzetu = wynajem.ID_sprzetu GROUP BY wynajem.ID_sprzetu  
+ORDER BY `COUNT(wynajem.ID_sprzetu)` DESC LIMIT 1;
+
+2.
+
+SELECT SUM(sprzet_budowlany.Kaucja) FROM sprzet_budowlany INNER JOIN wynajem ON sprzet_budowlany.ID_sprzetu = wynajem.ID_sprzetu WHERE wynajem.Nr_dowodu_osoby LIKE "JCK343973";
+
+3.
+
+SELECT klienci.Imie,klienci.Nazwisko FROM `klienci` INNER JOIN wynajem ON klienci.Nr_dowodu_osoby = wynajem.Nr_dowodu_osoby GROUP BY klienci.Nr_dowodu_osoby
+HAVING (COUNT(DISTINCT wynajem.ID_sprzetu) > 3);
+
+4.
+
+SELECT COUNT(klienci.Nr_dowodu_osoby) FROM `klienci` LEFT JOIN wynajem ON klienci.Nr_dowodu_osoby = wynajem.Nr_dowodu_osoby WHERE wynajem.Nr_dowodu_osoby IS NULL;

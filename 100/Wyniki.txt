@@ -1,0 +1,8 @@
+1.
+SELECT listy.nazwa, Round(AVG(punktacja.punkty),2) FROM `listy` INNER JOIN punktacja ON listy.id_listy = punktacja.id_listy GROUP BY listy.nazwa;
+
+2.
+SELECT osoby.imie,osoby.nazwisko FROM `osoby` INNER JOIN punktacja ON osoby.id_osoby = punktacja.id_osoby INNER JOIN listy ON punktacja.id_listy = listy.id_listy WHERE Listy.nazwa LIKE "P%" AND punktacja.data - listy.termin_oddania >= 14;
+
+5.
+SELECT osoby.imie,osoby.nazwisko,Count(listy.termin_oddania) FROM `osoby` INNER JOIN punktacja ON osoby.id_osoby = punktacja.id_osoby INNER JOIN listy ON punktacja.id_listy = listy.id_listy GROUP BY osoby.id_osoby HAVING ABS(COUNT(listy.termin_oddania)-11) > 0;

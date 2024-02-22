@@ -1,0 +1,19 @@
+2.
+
+SELECT leki_refundowane.Id_grupy,COUNT(Id_grupy) FROM `leki_refundowane` WHERE Cena_detaliczna - Cena_refundowana = 0 GROUP BY Id_grupy  
+ORDER BY `COUNT(Id_grupy)` DESC LIMIT 1;
+
+3a.
+
+SELECT Month(recepty.Data),Count(recepty.ID_recepty) FROM recepty GROUP BY Month(recepty.Data);
+
+4.
+
+SELECT grupy_lekow.Nazwa_grupy FROM `grupy_lekow` INNER JOIN leki_refundowane ON grupy_lekow.Id_grupy = leki_refundowane.Id_grupy LEFT JOIN recepty ON leki_refundowane.Kod_leku = recepty.Kod_leku WHERE recepty.ID_recepty IS NOT NULL;
+
+5.
+SELECT recepty.Data,recepty.ID_recepty FROM recepty
+INNER JOIN leki_refundowane ON recepty.Kod_leku = leki_refundowane.Kod_leku
+GROUP BY recepty.ID_recepty  
+HAVING (SUM(leki_refundowane.Cena_detaliczna) - SUM(leki_refundowane.Cena_refundowana)) > 2000  
+ORDER BY `recepty`.`Data` ASC

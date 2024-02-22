@@ -1,0 +1,20 @@
+1.
+SELECT osoby.Plec, COUNT(DISTINCT osoby.Id_uzytkownika) FROM `osoby` INNER JOIN wejscia ON osoby.Id_uzytkownika = wejscia.Id_uzytkownika INNER JOIN zajecia ON wejscia.Id_zajec = zajecia.Id_zajec WHERE zajecia.Zajecia LIKE "Fitness TBC" GROUP BY osoby.Plec HAVING osoby.Plec IS NOT NULL;
+
+2.
+
+SELECT Obiekt,SUM(Koszt) AS Koszt FROM `zajecia` INNER JOIN wejscia ON Zajecia.Id_zajec = wejscia.Id_zajec GROUP BY Obiekt;
+
+3.
+
+SELECT osoby.Imie,osoby.Nazwisko FROM osoby INNER JOIN wejscia ON osoby.Id_uzytkownika = wejscia.Id_uzytkownika INNER JOIN zajecia ON wejscia.Id_zajec = zajecia.Id_zajec WHERE wejscia.Data LIKE "2014-04-16" GROUP BY osoby.Id_uzytkownika HAVING COUNT(zajecia.Id_zajec) >1;
+
+4.
+
+SELECT zajecia.Zajecia,zajecia.Obiekt,Count(wejscia.Id_uzytkownika) AS Osoby FROM `zajecia` INNER JOIN wejscia ON zajecia.Id_zajec = wejscia.Id_zajec GROUP BY Zajecia.Obiekt,Zajecia.Zajecia 
+ORDER BY Osoby DESC LIMIT 1;
+
+5.
+
+SELECT zajecia.Obiekt, COUNT(wejscia.Id_uzytkownika) FROM `zajecia` INNER JOIN wejscia ON zajecia.Id_zajec = wejscia.Id_zajec GROUP BY zajecia.obiekt  
+ORDER BY `zajecia`.`Obiekt` ASC

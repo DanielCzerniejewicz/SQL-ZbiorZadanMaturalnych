@@ -1,0 +1,14 @@
+SELECT Plec,Count(Plec) FROM `ankiety` GROUP BY Plec;
+
+SELECT szkoly.Rodzaj_szkoly,Round(Avg(pyt1),2),Round(Avg(pyt2),2),Round(Avg(pyt3),2),Round(Avg(pyt4),2),Round(Avg(pyt5),2),Round(Avg(pyt6),2) FROM `ankiety` INNER JOIN szkoly ON ankiety.Id_szkoly = szkoly.Id_szkoly GROUP BY szkoly.Rodzaj_szkoly;
+
+SELECT gminy.Kod_gminy,Round(Avg(pyt6),2) FROM `gminy` INNER JOIN szkoly ON gminy.Kod_gminy = szkoly.Kod_gminy INNER JOIN ankiety ON ankiety.Id_szkoly = szkoly.Id_szkoly GROUP BY Kod_gminy  
+ORDER BY `Round(Avg(pyt6),2)` DESC
+
+SELECT szkoly.Rodzaj_szkoly,COUNT(ankiety.Nr_ankiety) FROM `ankiety` INNER JOIN szkoly ON ankiety.Id_szkoly = szkoly.Id_szkoly
+WHERE ankiety.pyt3 LIKE "5" GROUP BY szkoly.Rodzaj_szkoly;
+
+SELECT gminy.Nazwa_gminy,Count(ankiety.Nr_ankiety) FROM `gminy` INNER JOIN szkoly ON gminy.Kod_gminy = szkoly.Kod_gminy INNER JOIN ankiety ON szkoly.Id_szkoly=ankiety.Id_szkoly GROUP BY gminy.Nazwa_gminy  
+ORDER BY `Count(ankiety.Nr_ankiety)` DESC LIMIT 1;
+
+SELECT szkoly.Rodzaj_szkoly,COUNT(ankiety.Plec) FROM `ankiety` INNER JOIN szkoly ON ankiety.Id_szkoly = szkoly.Id_szkoly WHERE ankiety.pyt1 LIKE "5" GROUP BY Rodzaj_szkoly;

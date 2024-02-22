@@ -1,0 +1,23 @@
+1.
+
+SELECT loty.miejsce_docelowe, COUNT(DISTINCT loty.data) FROM `loty` GROUP BY miejsce_docelowe  
+ORDER BY `COUNT(DISTINCT loty.data)` DESC LIMIT 3;
+
+2.
+
+SELECT pasazerowie.nazwisko,pasazerowie.imie,COUNT(bilety.id_pasazera) FROM `pasazerowie` INNER JOIN bilety ON pasazerowie.id_pasazera = bilety.id_pasazera GROUP BY pasazerowie.id_pasazera HAVING COUNT(bilety.id_pasazera) > 15  
+ORDER BY `COUNT(bilety.id_pasazera)` ASC
+
+3.
+
+SELECT Month(loty.data),COUNT(bilety.id_pasazera) FROM `loty` INNER JOIN bilety ON bilety.id_lotu = loty.id_lotu INNER JOIN pasazerowie ON bilety.id_pasazera = pasazerowie.id_pasazera WHERE pasazerowie.miejscowosc LIKE "%Wroclaw%" GROUP BY Month(loty.data);
+
+4.
+
+SELECT pasazerowie.nazwisko,pasazerowie.imie FROM `pasazerowie` INNER JOIN bilety ON pasazerowie.id_pasazera = bilety.id_pasazera INNER JOIN loty ON bilety.id_lotu = loty.id_lotu WHERE loty.miejsce_docelowe LIKE 
+"%Londyn%" AND (HOUR(loty.godzina) >= 8 AND HOUR(loty.godzina) <=10)  
+ORDER BY `pasazerowie`.`nazwisko` ASC
+
+5.
+
+SELECT loty.id_lotu,loty.miejsce_docelowe FROM `loty` LEFT JOIN bilety ON loty.id_lotu = bilety.id_lotu WHERE bilety.id_lotu IS NULL;

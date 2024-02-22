@@ -1,0 +1,17 @@
+1.
+
+SELECT gatunki.nazwa_zwyczajowa,COUNT(obserwacje.ID_gatunku) FROM `gatunki` INNER JOIN obserwacje ON gatunki.ID_gatunku = obserwacje.ID_gatunku GROUP BY gatunki.ID_gatunku  
+ORDER BY `COUNT(obserwacje.ID_gatunku)` DESC LIMIT 3;
+
+2.
+
+SELECT Month(obserwacje.poczatek), COUNT(obserwacje.ID_gatunku) FROM `gatunki` INNER JOIN obserwacje ON gatunki.ID_gatunku = obserwacje.ID_gatunku WHERE gatunki.nazwa_zwyczajowa LIKE "remiz" GROUP BY Month(obserwacje.poczatek);
+
+3.
+
+SELECT gatunki.nazwa_zwyczajowa, COUNT(lokalizacje.ID_lokalizacji) FROM `gatunki` INNER JOIN obserwacje ON gatunki.ID_gatunku = obserwacje.ID_gatunku INNER JOIN lokalizacje ON obserwacje.ID_lokalizacji = lokalizacje.ID_lokalizacji WHERE gatunki.nazwa_lacinska LIKE "%Corvus%" AND lokalizacje.opis LIKE "%miasto%"
+GROUP BY gatunki.ID_gatunku;
+
+5.
+
+SELECT COUNT(obserwacje.ID_gatunku) FROM `obserwacje` LEFT JOIN gatunki ON obserwacje.ID_gatunku = gatunki.ID_gatunku WHERE gatunki.nazwa_zwyczajowa LIKE "zuraw" AND gatunki.ID_gatunku IS NOT NULL;

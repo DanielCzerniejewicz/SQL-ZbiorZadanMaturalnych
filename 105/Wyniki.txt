@@ -1,0 +1,13 @@
+3.
+
+SELECT osoby.Nazwisko,osoby.Imie,SUM(zamowienia.Liczba_sadzonek) FROM `rosliny` INNER JOIN zamowienia ON rosliny.Id_rosliny = zamowienia.Id_rosliny INNER JOIN osoby ON zamowienia.Id_klienta = osoby.Id_klienta
+WHERE rosliny.Kolor_kwiatow LIKE "bialo-liliowe" GROUP BY osoby.Id_klienta HAVING SUM(zamowienia.Liczba_sadzonek) > 10;
+
+4.
+
+SELECT rosliny.Nazwa FROM `rosliny` LEFT JOIN zamowienia ON zamowienia.Id_rosliny = rosliny.Id_rosliny WHERE zamowienia.Id_rosliny IS NULL;
+
+5.
+
+SELECT rosliny.Rozmiary_doniczki,Count(zamowienia.Lp) FROM `rosliny` INNER JOIN zamowienia ON rosliny.Id_rosliny = zamowienia.Id_rosliny GROUP BY rosliny.Rozmiary_doniczki;
+
